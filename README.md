@@ -1,2 +1,6 @@
-# sw-back
-MelonSpot, sangwoo, back
+# Project Init
+
+```
+npm init
+npm i express mongoose jsonwebtoken cookie-parser
+```
