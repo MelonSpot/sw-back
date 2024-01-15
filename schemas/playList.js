@@ -9,7 +9,7 @@ const playListSchema = new mongoose.Schema({
     musicIds: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "MusicList",
+            ref: "Music",
         },
     ],
 });
