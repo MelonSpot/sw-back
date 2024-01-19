@@ -1,12 +1,15 @@
 const User = require("../schemas/user");
 
 class UserRepository {
-    getUser = async () => {
-        return "유저 정보 조회";
+    getUser = async (condition) => {
+        const user = await User.findOne(condition);
+        console.log("user:", user);
+        return user;
     };
 
-    postUser = async () => {
-        return "유저 정보 등록";
+    postUser = async (condition) => {
+        const user = await User.create(condition);
+        return user;
     };
 
     putUser = async () => {
