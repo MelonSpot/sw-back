@@ -29,8 +29,16 @@ class MusicController {
     };
 
     getByTag = async (req, res) => {
-        let result = await this.musicService.getByTag();
-        return res.send({ result });
+        try {
+            const tagName = req.params.tagName;
+            const music = await this.musicService.getByTag(tagName);
+            return res.status(200).json(music);
+        } catch {
+            console.log(error);
+            return res.status(error.statusCode).json({
+                message: error.message,
+            });
+        }
     };
 }
 

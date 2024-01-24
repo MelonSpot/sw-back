@@ -5,8 +5,8 @@ const MusicController = require("../controllers/music.controller");
 const musicController = new MusicController();
 
 router.get("/", musicController.getAll);
-router.post("/:musicId", musicController.getOne);
-router.get("/:tagName", musicController.getByTag);
+router.get("/:musicId", musicController.getOne);
+router.get("/tag/:tagName", musicController.getByTag);
 
 module.exports = {
     router,
