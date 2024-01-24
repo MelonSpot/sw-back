@@ -4,7 +4,9 @@ class MusicService {
     musicRepository = new MusicRepository();
 
     getAll = async () => {
-        return await this.musicRepository.getMusic();
+        const type = "all";
+        const musicList = await this.musicRepository.getMusic(type);
+        return musicList;
     };
 
     getOne = async () => {

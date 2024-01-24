@@ -1,8 +1,11 @@
 const Music = require("../schemas/music");
 
 class MusicRepository {
-    getMusic = async () => {
-        return "음악 조회";
+    getMusic = async (condition) => {
+        if (condition === "all") {
+            const music = await Music.find();
+            return music;
+        }
     };
 
     postMusic = async () => {
