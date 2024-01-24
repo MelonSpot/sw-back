@@ -3,7 +3,6 @@ const User = require("../schemas/user");
 class UserRepository {
     getUser = async (condition) => {
         const user = await User.findOne(condition);
-        console.log("user:", user);
         return user;
     };
 
