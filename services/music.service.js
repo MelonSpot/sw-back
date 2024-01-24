@@ -5,17 +5,20 @@ class MusicService {
 
     getAll = async () => {
         const type = "all";
-        const musicList = await this.musicRepository.getMusic(type);
+        const musicList = await this.musicRepository.getMusic({ type });
         return musicList;
     };
 
     getOne = async (musicId) => {
-        const music = await this.musicRepository.getMusic(musicId);
+        const type = "_id";
+        const music = await this.musicRepository.getMusic({ type, musicId });
         return music;
     };
 
-    getByTag = async () => {
-        return await this.musicRepository.getMusic();
+    getByTag = async (tagName) => {
+        const type = "tag";
+        const music = await this.musicRepository.getMusic({ type, tagName });
+        return music;
     };
 }
 
