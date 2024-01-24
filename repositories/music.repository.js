@@ -5,6 +5,9 @@ class MusicRepository {
         if (condition === "all") {
             const music = await Music.find();
             return music;
+        } else if (condition !== "all") {
+            const music = await Music.findOne({ _id: condition });
+            return music;
         }
     };
 

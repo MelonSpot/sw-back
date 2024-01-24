@@ -9,8 +9,9 @@ class MusicService {
         return musicList;
     };
 
-    getOne = async () => {
-        return await this.musicRepository.getMusic();
+    getOne = async (musicId) => {
+        const music = await this.musicRepository.getMusic(musicId);
+        return music;
     };
 
     getByTag = async () => {
