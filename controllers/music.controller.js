@@ -4,8 +4,15 @@ class MusicController {
     musicService = new MusicService();
 
     getAll = async (req, res) => {
-        let result = await this.musicService.getAll();
-        return res.send({ result });
+        try {
+            const musicList = await this.musicService.getAll();
+            return res.status(200).json(musicList);
+        } catch {
+            console.log(error);
+            return res.status(error.statusCode).json({
+                message: error.message,
+            });
+        }
     };
 
     getOne = async (req, res) => {
