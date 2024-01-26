@@ -11,6 +11,8 @@ class PlayListController {
 
             if (!userId) {
                 throw new CustomError("로그인 후 이용 가능한 기능입니다.", 401);
+            } else if (!musicId) {
+                throw new CustomError("Parameter 값이 올바르지 않습니다.", 402);
             }
 
             const playList = await this.playListService.addPlayList(userId, musicId);
@@ -30,6 +32,8 @@ class PlayListController {
 
             if (!userId) {
                 throw new CustomError("로그인 후 이용 가능한 기능입니다.", 401);
+            } else if (!musicId) {
+                throw new CustomError("Parameter 값이 올바르지 않습니다.", 402);
             }
 
             const playList = await this.playListService.deletePlayList(userId, musicId);

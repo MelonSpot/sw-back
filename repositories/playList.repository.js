@@ -1,6 +1,11 @@
 const PlayList = require("../schemas/playList");
 
 class PlayListRepository {
+    postPlayList = async (condition) => {
+        const playList = await PlayList.create(condition);
+        return playList;
+    };
+
     getPlayList = async (condition) => {
         const playList = await PlayList.findOne(condition);
         return playList;

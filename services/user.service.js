@@ -20,7 +20,9 @@ class UserService {
             password,
         });
 
-        return user;
+        await this.playListRepository.postPlayList({ userId: user._id });
+
+        return true;
     };
 
     signIn = async (email, password) => {
@@ -44,11 +46,17 @@ class UserService {
         }
 
         const playList = await this.playListRepository.getPlayList({
-            email,
-            nickName,
+            userId: user._id,
         });
 
-        return { user, playList };
+        const userInfo = {
+            userId: user._id,
+            email: user.email,
+            nickName: user.nickName,
+            playList: playList.musicIds,
+        };
+
+        return userInfo;
     };
 }
 

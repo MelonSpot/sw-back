@@ -18,6 +18,11 @@ class MusicController {
     getOne = async (req, res) => {
         try {
             const musicId = req.params.musicId;
+
+            if (!musicId) {
+                throw new CustomError("Parameter 값이 올바르지 않습니다.", 402);
+            }
+
             const music = await this.musicService.getOne(musicId);
             return res.status(200).json(music);
         } catch {
@@ -31,6 +36,11 @@ class MusicController {
     getByTag = async (req, res) => {
         try {
             const tagName = req.params.tagName;
+
+            if (!tagName) {
+                throw new CustomError("Parameter 값이 올바르지 않습니다.", 402);
+            }
+
             const music = await this.musicService.getByTag(tagName);
             return res.status(200).json(music);
         } catch {
