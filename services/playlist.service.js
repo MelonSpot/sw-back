@@ -13,8 +13,14 @@ class PlayListService {
         return playList;
     };
 
-    deletePlayList = async () => {
-        return;
+    deletePlayList = async (userId, musicId) => {
+        const type = "delete";
+        const playList = await this.playListRepository.putPlayList({
+            userId,
+            musicId,
+            type,
+        });
+        return playList;
     };
 }
 
