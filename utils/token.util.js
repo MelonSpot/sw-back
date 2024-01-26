@@ -4,9 +4,10 @@ const jwt = require("jsonwebtoken");
 const secretKey = process.env.JWT_SECRET;
 
 class CreateToken {
-    constructor(email, nickName) {
-        this.email = email;
-        this.nickName = nickName;
+    constructor(user) {
+        this.email = user.email;
+        this.nickName = user.nickName;
+        this.userId = user._id;
     }
 
     createAccessToken() {
@@ -14,6 +15,7 @@ class CreateToken {
             {
                 email: this.email,
                 nickName: this.nickName,
+                userId: this.userId,
             },
             secretKey,
             {
