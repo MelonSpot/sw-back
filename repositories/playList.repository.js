@@ -17,8 +17,8 @@ class PlayListRepository {
             );
         } else if (condition.type === "delete") {
             updatedPlayList = await PlayList.findOneAndUpdate(
-                { userId: userId },
-                { $pull: { musicIds: musicId } },
+                { userId: condition.userId },
+                { $pull: { musicIds: condition.musicId } },
                 { new: true }, // 수정된 문서를 반환
             );
         }
