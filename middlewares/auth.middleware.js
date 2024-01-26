@@ -1,27 +1,30 @@
 const jwt = require("jsonwebtoken");
-const CustomError = require("../utils/error.utils");
-const { VerifyToken } = require("../utils/token.utils");
+const CustomError = require("../utils/error.util");
+const { VerifyToken } = require("../utils/token.util");
 
 require("dotenv").config();
 const secretKey = process.env.JWT_SECRET;
 
 module.exports = async (req, res, next) => {
     try {
-        if (req.headers.authorization === undefined) {
+        if (req.headers.cookie === undefined) {
             throw new CustomError(
                 "로그인 후 이용 가능한 기능입니다.(request 헤더에 토큰 정보가 없음)",
                 401,
             );
         }
 
-        const token = req.headers.authorization;
-        const [AuthType, AuthToken] = (token ?? "").split(" ");
+        const token = req.headers.cookie.split("=")[1];
+        console.log(token);
+        const [AuthType, AuthToken] = (token ?? "").split("%20");
         if (!AuthToken || AuthType !== "Bearer") {
             throw new CustomError(
                 "로그인 후 이용 가능한 기능입니다.(토큰 형식이 올바르지 않음)",
                 401,
             );
         }
+        console.log(AuthType);
+        console.log(AuthToken);
 
         const verifyToken = new VerifyToken(AuthToken);
 
@@ -33,7 +36,6 @@ module.exports = async (req, res, next) => {
             );
         }
 
-        // 토큰 Decode -> 토큰의 payload에 닮긴 user 정보 추출
         const user = jwt.verify(AuthToken, secretKey);
 
         res.locals.user = user;

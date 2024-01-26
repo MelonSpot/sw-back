@@ -56,8 +56,24 @@ class UserController {
     };
 
     userInfo = async (req, res) => {
-        let result = await this.userService.userInfo();
-        return res.send({ result });
+        try {
+            const { email, nickName } = res.locals.user;
+
+            if (!email || !nickName) {
+                throw new CustomError("로그인 후 이용 가능한 기능입니다.", 401);
+            }
+
+            console.log(email, nickName);
+
+            const userInfo = await this.userService.userInfo(email, nickName);
+
+            return res.status(200).json(userInfo);
+        } catch (error) {
+            console.log(error);
+            return res.status(error.statusCode).json({
+                message: error.message,
+            });
+        }
     };
 }
 
