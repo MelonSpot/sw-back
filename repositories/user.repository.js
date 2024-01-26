@@ -10,14 +10,6 @@ class UserRepository {
         const user = await User.create(condition);
         return user;
     };
-
-    putUser = async () => {
-        return "유저 정보 수정";
-    };
-
-    deleteUser = async () => {
-        return "유저 정보 삭제";
-    };
 }
 
 module.exports = UserRepository;
