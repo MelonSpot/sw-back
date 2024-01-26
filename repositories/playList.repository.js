@@ -1,21 +1,22 @@
-const playList = require("../schemas/playList");
+const PlayList = require("../schemas/playList");
 
-class MusicRepository {
-    getMusic = async (music) => {
-        return music;
+class PlayListRepository {
+    getPlayList = async (condition) => {
+        const playList = await PlayList.findOne(condition);
+        return playList;
     };
 
-    postMusic = async (music) => {
-        return music;
-    };
+    // postPlayList = async (music) => {
+    //     return music;
+    // };
 
-    putMusic = async (music) => {
-        return music;
-    };
+    // putPlayList = async (music) => {
+    //     return music;
+    // };
 
-    deleteMusic = async (music) => {
-        return music;
-    };
+    // deletePlayList = async (music) => {
+    //     return music;
+    // };
 }
 
-module.exports = MusicRepository;
+module.exports = PlayListRepository;

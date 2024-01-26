@@ -1,9 +1,11 @@
 const UserRepository = require("../repositories/user.repository");
+const PlayListRepository = require("../repositories/playList.repository");
 const CustomError = require("../utils/error.util");
 const { CreateToken } = require("../utils/token.util");
 
 class UserService {
     userRepository = new UserRepository();
+    playListRepository = new PlayListRepository();
 
     signUp = async (email, nickName, password, res) => {
         const checkUser = await this.userRepository.getUser({ email });
@@ -37,8 +39,19 @@ class UserService {
         return { accessToken };
     };
 
-    userInfo = async () => {
-        return await this.userRepository.getUser();
+    userInfo = async (email, nickName) => {
+        const user = await this.userRepository.getUser({ email, nickName });
+
+        if (!user) {
+            throw new CustomError("유저 정보가 없습니다.", 404);
+        }
+
+        const playList = await this.playListRepository.getPlayList({
+            email,
+            nickName,
+        });
+
+        return { user, playList };
     };
 }
 
