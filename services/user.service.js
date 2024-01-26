@@ -27,13 +27,10 @@ class UserService {
         const user = await this.userRepository.getUser({ email });
 
         if (!user || password !== user.password) {
-            throw new CustomError(
-                "비밀번호 또는 아이디가 일치하지 않습니다.",
-                401,
-            );
+            throw new CustomError("비밀번호 또는 아이디가 일치하지 않습니다.", 401);
         }
 
-        const createToken = new CreateToken(user.email, user.nickName);
+        const createToken = new CreateToken(user);
         const accessToken = createToken.createAccessToken();
 
         return { accessToken };

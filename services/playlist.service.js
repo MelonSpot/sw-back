@@ -3,15 +3,17 @@ const PlayListRepository = require("../repositories/playList.repository");
 class PlayListService {
     playListRepository = new PlayListRepository();
 
-    putUserPlayList = async () => {
-        return;
+    addPlayList = async (userId, musicId) => {
+        const type = "add";
+        const playList = await this.playListRepository.putPlayList({
+            userId,
+            musicId,
+            type,
+        });
+        return playList;
     };
 
-    deleteUserPlayList = async () => {
-        return;
-    };
-
-    getTagPlayList = async () => {
+    deletePlayList = async () => {
         return;
     };
 }

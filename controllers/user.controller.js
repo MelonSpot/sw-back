@@ -9,10 +9,7 @@ class UserController {
             const { email, nickName, password } = req.body;
 
             if (!email || !nickName || !password) {
-                throw new CustomError(
-                    "email, nickName, password는 필수 입력값입니다.",
-                    400,
-                );
+                throw new CustomError("email, nickName, password는 필수 입력값입니다.", 400);
             }
 
             await this.userService.signUp(email, nickName, password);
@@ -31,16 +28,10 @@ class UserController {
             const { email, password } = req.body;
 
             if (!email || !password) {
-                throw new CustomError(
-                    "email, password는 필수 입력값입니다.",
-                    400,
-                );
+                throw new CustomError("email, password는 필수 입력값입니다.", 400);
             }
 
-            const { accessToken } = await this.userService.signIn(
-                email,
-                password,
-            );
+            const { accessToken } = await this.userService.signIn(email, password);
 
             res.cookie("accessToken", `Bearer ${accessToken}`, {
                 secure: false,
@@ -62,8 +53,6 @@ class UserController {
             if (!email || !nickName) {
                 throw new CustomError("로그인 후 이용 가능한 기능입니다.", 401);
             }
-
-            console.log(email, nickName);
 
             const userInfo = await this.userService.userInfo(email, nickName);
 
